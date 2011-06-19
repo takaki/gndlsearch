@@ -43,7 +43,7 @@ class sample2:
     def on_button2_clicked(self, widget, event=None):
         ix = open_dir("db")
         with ix.searcher () as searcher:
-            print "AND"
+            # print "AND"
             q = []
 
             e = self.wTree.get_object('entry1')
@@ -61,7 +61,7 @@ class sample2:
             if s:
                 q.append(Term("title", unicode(s,'utf-8')))
 
-            results = searcher.search(And(q))
+            results = searcher.search(And(q), limit=300)
 
             # results.filter(results_2)
             s = ''
