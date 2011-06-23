@@ -37,9 +37,8 @@ class sample2:
 
         ls = self.wTree.get_object('liststore1')
 
-        l = ['著者','出版社','タイトル']
-        for i in range(len(l)):
-            column = gtk.TreeViewColumn(l[i],
+        for i,j in enumerate(['著者','出版社','タイトル']):
+            column = gtk.TreeViewColumn(j,
                                         gtk.CellRendererText()
                                         , text=i)
             tv.append_column(column)
