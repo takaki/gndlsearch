@@ -18,6 +18,7 @@ try:
 except:  
     sys.exit(1)  
   
+
 class sample2:  
     def __init__(self):  
         gladefile = 'gndlsearch.glade'  
@@ -31,6 +32,19 @@ class sample2:
 
         self.textView = self.wTree.get_object("textview1")  
         self.MainWindow = self.wTree.get_object("window1")  
+
+        tv = self.wTree.get_object('treeview1')
+
+        ls = self.wTree.get_object('liststore1')
+
+        l = ['著者','出版社','タイトル']
+        for i in range(len(l)):
+            column = gtk.TreeViewColumn(l[i],
+                                        gtk.CellRendererText()
+                                        , text=i)
+            tv.append_column(column)
+
+
         self.MainWindow.connect("delete-event", gtk.main_quit)
         self.MainWindow.show_all()
 
@@ -40,10 +54,10 @@ class sample2:
         self.wTree.get_object('entry2').set_text('')
         self.wTree.get_object('entry3').set_text('')
 
+
     def on_button2_clicked(self, widget, event=None):
         ix = open_dir("db")
         with ix.searcher () as searcher:
-            # print "AND"
             q = []
 
             e = self.wTree.get_object('entry1')
@@ -63,14 +77,11 @@ class sample2:
 
             results = searcher.search(And(q), limit=300)
 
-            # results.filter(results_2)
-            s = ''
+            ls = self.wTree.get_object('liststore1')
+            ls.clear()
             for r in results:
-                s += "%s; %s; %s\n" % (r['author'], r['publisher'], r['title'])
+                ls.append([r['author'], r['publisher'], r['title']])
 
-            t = self.textView
-            b = t.get_buffer()
-            b.set_text(s)
 
     def on_MainWindow_destroy(self,widget):  
         gtk.main_quit()  

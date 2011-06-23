@@ -2,6 +2,16 @@
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
+  <object class="GtkListStore" id="liststore1">
+    <columns>
+      <!-- column-name gchararray1 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray2 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray3 -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkWindow" id="window1">
     <child>
       <object class="GtkVBox" id="vbox1">
@@ -134,9 +144,10 @@
             <property name="hscrollbar_policy">automatic</property>
             <property name="vscrollbar_policy">automatic</property>
             <child>
-              <object class="GtkTextView" id="textview1">
+              <object class="GtkTreeView" id="treeview1">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="model">liststore1</property>
               </object>
             </child>
           </object>
